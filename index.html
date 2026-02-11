@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Portfolio — Strategic Visual Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --light-gray: #F5F5F5;
+            --mid-gray: #E0E0E0;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --gold: #D4AF37;
+            --gold-dark: #B8942A;
+            --gold-light: #F5E6C8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--mid-gray);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+
+        .logo-accent {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 5% 6rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 0.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--mid-gray);
+            justify-content: start;
+        }
+
+        .stat {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .stat:nth-child(1) { animation-delay: 0.6s; }
+        .stat:nth-child(2) { animation-delay: 0.75s; }
+        .stat:nth-child(3) { animation-delay: 0.9s; }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Approach Section */
+        .approach {
+            background: var(--off-white);
+            padding: 8rem 5%;
+        }
+
+        .approach-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            max-width: 600px;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .approach-item {
+            background: var(--white);
+            padding: 2.5rem;
+            border: 1px solid var(--mid-gray);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .approach-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .approach-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .approach-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.08);
+        }
+
+        .approach-number {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .approach-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .approach-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            gap: 8rem;
+            margin-top: 5rem;
+        }
+
+        .project {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .project:nth-child(1) { animation-delay: 0.2s; }
+        .project:nth-child(2) { animation-delay: 0.4s; }
+
+        .project:nth-child(even) {
+            direction: rtl;
+        }
+
+        .project:nth-child(even) .project-info {
+            direction: ltr;
+        }
+
+        .project-images {
+            position: relative;
+        }
+
+        .project-image-main {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid var(--mid-gray);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .project-image-main:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-image-secondary {
+            position: absolute;
+            width: 45%;
+            bottom: -3rem;
+            right: -3rem;
+            border: 1px solid var(--mid-gray);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            padding: 4px;
+        }
+
+        .project:nth-child(even) .project-image-secondary {
+            left: -3rem;
+            right: auto;
+        }
+
+        .project-info {
+            padding: 2rem 0;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .project-category {
+            color: var(--gold);
+        }
+
+        .project-info h3 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: var(--off-white);
+            border: 1px solid var(--mid-gray);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--gold-light);
+            border-color: var(--gold);
+            color: var(--text-primary);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--light-gray);
+            padding: 8rem 5%;
+        }
+
+        .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+        }
+
+        .contact-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-email:hover {
+            color: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 5%;
+            background: var(--white);
+            border-top: 1px solid var(--mid-gray);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .project {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .project:nth-child(even) {
+                direction: ltr;
+            }
+
+            .project-image-secondary {
+                bottom: -2rem;
+                right: -2rem;
+                width: 50%;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 5rem 5% 4rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image-secondary {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                Design <span class="logo-accent">Systems</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-label">Graphic Designer Since 2009</span>
+            <h1>Strategic visual systems that scale with clarity and precision</h1>
+            <p class="hero-description">
+                I transform complex information into organized, maintainable design systems. My work focuses on usability, hierarchy, and communication efficiency — delivering assets that teams can confidently build upon.
+            </p>
+            <p class="hero-description">
+                Beyond aesthetics, I architect visual frameworks that reduce cognitive load, ensure consistency across touchpoints, and support long-term brand evolution.
+            </p>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Projects Delivered</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">Brands Supported</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section class="approach" id="approach">
+        <div class="approach-content">
+            <div class="section-header">
+                <div class="section-label">How I Work</div>
+                <h2 class="section-title">Design as infrastructure, not decoration</h2>
+                <p class="section-description">
+                    My approach prioritizes structure, scalability, and strategic thinking over purely aesthetic concerns. Every decision serves the broader system.
+                </p>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-item">
+                    <span class="approach-number">01</span>
+                    <h3>Information Architecture</h3>
+                    <p>
+                        I start by understanding how information flows. Before any visual work begins, I map hierarchies, relationships, and user pathways to ensure the design communicates with precision.
+                    </p>
+                </div>
+
+                <div class="approach-item">
+                    <span class="approach-number">02</span>
+                    <h3>Systematic Consistency</h3>
+                    <p>
+                        Every component, typeface, color, and spacing decision follows a documented logic. This creates predictability for teams and users while maintaining flexibility for growth.
+                    </p>
+                </div>
+
+                <div class="approach-item">
+                    <span class="approach-number">03</span>
+                    <h3>Maintainable Assets</h3>
+                    <p>
+                        I design with handoff in mind. Files are organized, components are modular, and documentation ensures teams can iterate without constant designer intervention.
+                    </p>
+                </div>
+
+                <div class="approach-item">
+                    <span class="approach-number">04</span>
+                    <h3>Performance Focus</h3>
+                    <p>
+                        Design must perform under real conditions. I optimize for load times, accessibility standards, and cross-platform consistency — not just what looks good in presentations.
+                    </p>
+                </div>
+
+                <div class="approach-item">
+                    <span class="approach-number">05</span>
+                    <h3>Strategic Iteration</h3>
+                    <p>
+                        I support recurring design needs with established processes, templates, and reusable patterns. This allows teams to move fast while maintaining quality and brand alignment.
+                    </p>
+                </div>
+
+                <div class="approach-item">
+                    <span class="approach-number">06</span>
+                    <h3>Communication Efficiency</h3>
+                    <p>
+                        Every design choice enhances clarity. I eliminate visual noise, establish clear hierarchies, and ensure users can navigate information without cognitive overload.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="work">
+        <div class="section-header">
+            <div class="section-label">Selected Work</div>
+            <h2 class="section-title">Systems that solve business problems</h2>
+            <p class="section-description">
+                Each project demonstrates strategic thinking, attention to detail, and a commitment to building design infrastructure that scales.
+            </p>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Project 1: Farofa de Ouro -->
+            <article class="project">
+                <div class="project-images">
+                    <img src="images/ChatGPT_Image_6_de_fev__de_2026__10.PNG" alt="Farofa de Ouro packaging design" class="project-image-main">
+                    <img src="images/ChatGPT_Image_10_de_fev__de_2026__08_28_38.png" alt="Farofa de Ouro product detail" class="project-image-secondary">
+                </div>
+                <div class="project-info">
+                    <div class="project-meta">
+                        <span class="project-category">Brand Identity</span>
+                        <span>2024</span>
+                    </div>
+                    <h3>Farofa de Ouro</h3>
+                    <p class="project-description">
+                        Complete visual identity system for a premium Brazilian culinary brand. Developed packaging architecture, typographic hierarchy, and brand guidelines ensuring consistency across product lines. The gold accent system became a recognizable signature while maintaining production feasibility.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Brand Guidelines</span>
+                        <span class="tag">Packaging System</span>
+                        <span class="tag">Typography</span>
+                        <span class="tag">Product Photography Direction</span>
+                    </div>
+                    <a href="#" class="project-link">View case study →</a>
+                </div>
+            </article>
+
+            <!-- Project 2: EightCore Analytics -->
+            <article class="project">
+                <div class="project-images">
+                    <img src="images/1.png" alt="EightCore analytics dashboard" class="project-image-main">
+                    <img src="images/2.png" alt="EightCore data visualization" class="project-image-secondary">
+                </div>
+                <div class="project-info">
+                    <div class="project-meta">
+                        <span class="project-category">Data Visualization</span>
+                        <span>2024</span>
+                    </div>
+                    <h3>EightCore Analytics Platform</h3>
+                    <p class="project-description">
+                        Designed a comprehensive dashboard system for predictive business intelligence. Established clear information hierarchies for complex datasets, color-coded alert systems, and reusable component libraries. Prioritized scanability and decision-making speed for executive audiences.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Dashboard Design</span>
+                        <span class="tag">Information Design</span>
+                        <span class="tag">Component Library</span>
+                        <span class="tag">Data Visualization</span>
+                    </div>
+                    <a href="#" class="project-link">View case study →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Let's build systems that work</h2>
+            <p class="contact-description">
+                I'm available for design system development, brand standardization, recurring design support, and projects requiring structured, scalable visual solutions.
+            </p>
+            <a href="mailto:pasdioraelaine@gmail.com" class="contact-email">pasdioraelaine@gmail.com</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2024 — Designed with systems thinking</p>
+            <div class="footer-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Behance</a>
+                <a href="#">Dribbble</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
